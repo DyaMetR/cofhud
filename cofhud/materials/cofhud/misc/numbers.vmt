@@ -1,0 +1,5 @@
+"UnlitGeneric"
+{
+   "$basetexture" "cofhud/misc/numbers"
+   "$additive" "1"
+}

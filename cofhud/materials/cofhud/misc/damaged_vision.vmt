@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+   "$basetexture" "cofhud/misc/damaged_vision"
+   "$additive" "1"
+   "$vertexalpha" "1"
+   "$vertexcolor" "1"
+}
