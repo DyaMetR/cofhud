@@ -1,8 +1,8 @@
 --[[------------
   CRY OF FEAR
 Heads Up Display
- Version 1.0.0
-    22/08/18
+ Version 1.1.0
+    24/08/18
 By DyaMetR
 ]]--------------
 

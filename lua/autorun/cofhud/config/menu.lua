@@ -23,6 +23,11 @@ if CLIENT then
   		}
   	);
 
+    -- Localization
+    local combobox, label = panel:ComboBox("Language", "cofhud_language");
+      for id, language in pairs(COFHUD:GetLanguages()) do
+    		combobox:AddChoice(language.name, id);
+      end
 
     -- Composition
     panel:AddControl( "Label" , { Text = ""} );
@@ -159,11 +164,12 @@ if CLIENT then
 
     -- Credits
     panel:AddControl( "Label",  { Text = ""});
-    panel:AddControl( "Label",  { Text = "Version 1.0.0"});
+    panel:AddControl( "Label",  { Text = "Version 1.1.0"});
     panel:AddControl( "Label",  { Text = ""});
   	panel:AddControl( "Label",  { Text = "Credits"});
     panel:AddControl( "Label",  { Text = "Main script: DyaMetR"});
     panel:AddControl( "Label",  { Text = "Textures from: Team Psykskallar"});
+    panel:AddControl( "Label",  { Text = ""});
   end
 
   local function menuCreation()

@@ -20,13 +20,14 @@ if CLIENT then
     ["cofhud_ammo_enabled"] = 1,
     ["cofhud_ammo_offset_x"] = 0,
     ["cofhud_ammo_offset_y"] = 0,
-    ["cofhud_ammo_reserve"] = 0,
+    ["cofhud_ammo_reserve"] = 1,
     ["cofhud_ammo_clip"] = 0,
     ["cofhud_damage_enabled"] = 1,
     ["cofhud_death_enabled"] = 1,
     ["cofhud_intro_enabled"] = 1,
     ["cofhud_pickup_enabled"] = 1,
-    ["cofhud_notification_enabled"] = 1
+    ["cofhud_notification_enabled"] = 1,
+    ["cofhud_language"] = "en"
   };
 
   -- Configuration
@@ -186,6 +187,14 @@ if CLIENT then
   ]]
   function COFHUD:IsNotificationEnabled()
     return self.Configuration.Values["cofhud_notification_enabled"]:GetInt() > 0;
+  end
+
+  --[[
+    Returns the currently selected language id
+    @return {string} language
+  ]]
+  function COFHUD:CurrentLanguage()
+    return self.Configuration.Values["cofhud_language"]:GetString();
   end
 
   --[[

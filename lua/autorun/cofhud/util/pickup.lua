@@ -13,30 +13,16 @@ if CLIENT then
   local ITEM_SOUND = "cofhud/item_get.wav";
   local WEAPON_SOUND = "cofhud/weapon_get.wav";
 
-  -- Database
-  COFHUD.ItemStrings = {};
-
   --[[
-    Adds an item string upon picking it up
-    @param {string} item
-    @param {string} string
-    @void
-  ]]
-  function COFHUD:AddItemString(item, string)
-    self.ItemStrings[item] = string;
-  end
-
-  --[[
-    Returns an item string
-    @param {string} item
-    @param {table|null} args
+    Returns a custom ammo pickup string if it's available
+    @param {string} ammoType
     @return {string} string
   ]]
-  function COFHUD:GetItemString(item, ...)
-    if (self.ItemStrings[item] == nil) then return item end;
-    return string.format(self.ItemStrings[item], ...);
+  function COFHUD:GetAmmoString(ammoType)
+    local string = self:GetAmmoType(self:CurrentLanguage(), ammoType);
+    if (not self:HasAmmoType(ammoType) or string == nil) then return AMMO_STR end;
+    return string;
   end
-
 
   --[[
     Pickup history override
@@ -52,7 +38,7 @@ if CLIENT then
   hook.Add("HUDWeaponPickedUp", "cofhud_pickup_weapon", function(weapon)
     if (not COFHUD:IsEnabled() or not COFHUD:IsItemPickupEnabled()) then return end;
     surface.PlaySound(WEAPON_SOUND);
-    COFHUD:SendDialog(COFHUD:GetItemString(WEAPON_STR, language.GetPhrase(weapon:GetPrintName())), ITEM_COLOR);
+    COFHUD:SendDialog(COFHUD:GetString(WEAPON_STR, language.GetPhrase(weapon:GetPrintName())), ITEM_COLOR);
   end);
 
   --[[
@@ -61,7 +47,7 @@ if CLIENT then
   hook.Add("HUDAmmoPickedUp", "cofhud_pickup_ammo", function(item, amount)
     if (not COFHUD:IsEnabled() or not COFHUD:IsItemPickupEnabled()) then return end;
     surface.PlaySound(ITEM_SOUND);
-    COFHUD:SendDialog(COFHUD:GetItemString(AMMO_STR, language.GetPhrase(item..AMMO_SUFIX), amount), AMMO_COLOR);
+    COFHUD:SendDialog(COFHUD:GetString(COFHUD:GetAmmoString(item), language.GetPhrase(item..AMMO_SUFIX), amount), AMMO_COLOR);
   end);
 
   --[[
@@ -70,7 +56,7 @@ if CLIENT then
   hook.Add("HUDItemPickedUp", "cofhud_pickup_item", function(item)
     if (not COFHUD:IsEnabled() or not COFHUD:IsItemPickupEnabled()) then return end;
     surface.PlaySound(ITEM_SOUND);
-    COFHUD:SendDialog(COFHUD:GetItemString(item) or language.GetPhrase(item), ITEM_COLOR);
+    COFHUD:SendDialog(COFHUD:GetString(item) or language.GetPhrase(item), ITEM_COLOR);
   end);
 
 end

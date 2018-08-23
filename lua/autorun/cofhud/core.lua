@@ -38,6 +38,7 @@ COFHUD:IncludeFile("util/death.lua");
 COFHUD:IncludeFile("util/intro.lua");
 COFHUD:IncludeFile("util/dialog.lua");
 COFHUD:IncludeFile("util/pickup.lua");
+COFHUD:IncludeFile("util/language.lua");
 
 -- Elements
 COFHUD:IncludeFile("elements/ammunition.lua");
@@ -45,13 +46,15 @@ COFHUD:IncludeFile("elements/draw.lua");
 COFHUD:IncludeFile("elements/health.lua");
 COFHUD:IncludeFile("elements/damage.lua");
 COFHUD:IncludeFile("elements/camera.lua");
-//COFHUD:IncludeFile("elements/hand.lua");
+--COFHUD:IncludeFile("elements/hand.lua");
 COFHUD:IncludeFile("elements/intro.lua");
 COFHUD:IncludeFile("elements/notification.lua");
 
 -- Data
 COFHUD:IncludeFile("data/ammunition.lua");
-COFHUD:IncludeFile("data/items.lua");
+--COFHUD:IncludeFile("data/items.lua");
+COFHUD:IncludeFile("data/language/english.lua");
+COFHUD:IncludeFile("data/language/spanish.lua");
 
 -- Load add-ons
 local files, directories = file.Find("autorun/cofhud/add-ons/*.lua", "LUA");

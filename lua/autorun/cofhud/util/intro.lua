@@ -28,7 +28,7 @@ if CLIENT then
   ]]
   function COFHUD:GetMapName()
     local mapName = game.GetMap();
-    local gamemode = getGamemodeName();
+    local gamemode = getGamemodeName() or engine.ActiveGamemode();
     local startPos, endPos = string.find(mapName, "_");
     local nameOnly = string.Replace(string.sub(mapName, endPos+1), "_", " ");
     local upped = string.upper(string.sub(nameOnly, 1, 1))..string.sub(nameOnly, 2);
@@ -42,7 +42,7 @@ if CLIENT then
   ]]
   function COFHUD:DrawBlackBars(h)
     draw.RoundedBox(0, 0, 0, ScrW(), h, Color(0, 0, 0));
-    draw.RoundedBox(0, 0, ScrH() - h, ScrW(), h, Color(0, 0, 0));
+    draw.RoundedBox(0, 0, math.floor(ScrH() - h), ScrW(), math.ceil(h), Color(0, 0, 0));
   end
 
 end
