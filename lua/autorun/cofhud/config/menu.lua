@@ -164,7 +164,7 @@ if CLIENT then
 
     -- Credits
     panel:AddControl( "Label",  { Text = ""});
-    panel:AddControl( "Label",  { Text = "Version 1.1.0"});
+    panel:AddControl( "Label",  { Text = "Version 1.1.1"});
     panel:AddControl( "Label",  { Text = ""});
   	panel:AddControl( "Label",  { Text = "Credits"});
     panel:AddControl( "Label",  { Text = "Main script: DyaMetR"});

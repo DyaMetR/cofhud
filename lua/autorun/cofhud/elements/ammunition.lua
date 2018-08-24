@@ -20,10 +20,11 @@ if CLIENT then
   ]]
   function COFHUD:DrawClip(ammoType, clipSize, clip1, x, y)
     y = y - (self.BAR_HEIGHT + self:GetAmmoIcon(ammoType).h);
+    local bulletSize = ScrH()/self:GetBulletIcon(ammoType).h;
     if (clip1 > clipSize) then clipSize = clip1; end;
     if (clip1 > -1) then
-      self:DrawResizableBar(x, y, self:GetClipHeight(ammoType, clipSize) + TOP_MARGIN);
-      self:DrawBulletStream(x + X_MARGIN, y - BOTTOM_MARGIN + self.BAR_HEIGHT, clip1, ammoType);
+      self:DrawResizableBar(x, y, math.Clamp(self:GetClipHeight(ammoType, clipSize) + TOP_MARGIN, 0, ScrH()));
+      self:DrawBulletStream(x + X_MARGIN, y - BOTTOM_MARGIN + self.BAR_HEIGHT, math.Clamp(clip1, 0, bulletSize), ammoType);
     end
   end
 
@@ -49,7 +50,7 @@ if CLIENT then
     local amount = math.ceil((height + whiteSpace)/innerSize);
     local max = amount - 1;
 
-    for i=0, max do
+    for i=0, math.Clamp(max, 0, ScrW()/self.BAR_WIDTH) do
       local offset = x - (self.BAR_WIDTH * max) + (self.BAR_WIDTH * (max - i));
       local clip = clip1 - (bulletsPerClip * i);
       local size = clipSize - (bulletsPerClip * i);
@@ -58,24 +59,6 @@ if CLIENT then
       self:DrawResizableBar(offset, y, math.Clamp((innerSize - emptySpace) + TOP_MARGIN, 0, self.BAR_HEIGHT));
       self:DrawBulletStream(offset + X_MARGIN, y - BOTTOM_MARGIN + self.BAR_HEIGHT, math.Clamp(clip, 0, bulletsPerClip), ammoType);
     end
-
-    --[[local height = self:GetClipHeight(ammoType, clipSize);
-    local bulletsPerClip = math.floor((self.BAR_HEIGHT - TOP_MARGIN)/self:GetBulletIcon(ammoType).h);
-    local bulletSize = ((math.Clamp(clipSize, 0, bulletsPerClip) * self:GetBulletIcon(ammoType).h) + (TOP_MARGIN + BOTTOM_MARGIN));
-    local emptySpace = height - bulletSize;
-    local amount = math.ceil((height + emptySpace)/self.BAR_HEIGHT);
-    local max = amount - 1;
-    local lastClip = (height) - ((self.BAR_HEIGHT - TOP_MARGIN) * max) + (self:GetBulletIcon(ammoType).h/2);
-    for i=0, max do
-      if (i == max and amount > 1) then
-        height = lastClip;
-      end
-      local clip = clip1 - (bulletsPerClip * i);
-      draw.SimpleText((bulletsPerClip * i).." -- "..i, "ChatFont", 20, 40 * (i+1))
-      local offset = x - (self.BAR_WIDTH * max) + (self.BAR_WIDTH * (max - i));
-      self:DrawResizableBar(offset, y, math.Clamp(height + TOP_MARGIN, 0, self.BAR_HEIGHT));
-      self:DrawBulletStream(offset + X_MARGIN, y - BOTTOM_MARGIN + self.BAR_HEIGHT, math.Clamp(clip, 0, bulletsPerClip), ammoType);
-    end]]
   end
 
   --[[
