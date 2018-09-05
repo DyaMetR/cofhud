@@ -15,13 +15,12 @@ if CLIENT then
   }
 
   hook.Add( "HUDShouldDraw", "cofhud_hide_default_hud", function( name )
-    if (not COFHUD:IsEnabled()) then return end;
     hide.CHudHealth = COFHUD:IsHealthEnabled();
     hide.CHudBattery = COFHUD:IsArmorEnabled();
     hide.CHudAmmo = COFHUD:IsAmmoEnabled();
     hide.CHudSecondaryAmmo = COFHUD:IsAmmoEnabled();
     hide.CHudDamageIndicator = COFHUD:IsDamageEffectEnabled();
-  	if ( hide[ name ] ) then return false end;
+  	if ( hide[ name ] and COFHUD:IsEnabled() ) then return false end;
   end )
 end
 
