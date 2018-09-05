@@ -43,10 +43,14 @@ Now if you've got no preset strings or ammo links you can start with:
 `COFHUD:AddString(language, id, string, order);`
 
 >language: The language id
+>
 >id: Id of the string
+>
 >string: The text itself
+>
 >order: A table to change the order parameters are used when formatting
 >the texts. Right now by default the orders are:
+>
 >+   Ammo: Ammo name, amount
 
 If you want to create your own strings for an ammo type, first you need
@@ -54,7 +58,9 @@ to create the string itself, then link it to any ammo type you want with:
 `COFHUD:AddAmmoType(language, ammoType, id);`
 
 >language: The language id
+>
 >ammoType: The ammo type name
+>
 >id: The string id to link
 
 ### Adding ammo icons
@@ -67,10 +73,15 @@ There are two types of icons per ammo type:
 
 Now, the methods to add ammo types to the mix are:
 `COFHUD:AddBulletIcon(ammoType, texture, w, h, isMaterial);`
+
 `COFHUD:AddAmmoIcon(ammoType, texture, w, h, isMaterial);`
 
 >ammoType: Ammo type name
+>
 >texture: Either an Material or a Texture object
+>
 >w: Texture width
+>
 >h: Texture height
+>
 >isMaterial: Whether the texture is a Material object or not
