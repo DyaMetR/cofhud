@@ -72,6 +72,7 @@ There are two types of icons per ammo type:
     -   It's _recommended_ to give it a maximum size of **32x32px**.
 
 Now, the methods to add ammo types to the mix are:
+
 `COFHUD:AddBulletIcon(ammoType, texture, w, h, isMaterial);`
 
 `COFHUD:AddAmmoIcon(ammoType, texture, w, h, isMaterial);`
