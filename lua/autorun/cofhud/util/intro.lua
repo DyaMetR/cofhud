@@ -30,7 +30,10 @@ if CLIENT then
     local mapName = game.GetMap();
     local gamemode = getGamemodeName() or engine.ActiveGamemode();
     local startPos, endPos = string.find(mapName, "_");
-    local nameOnly = string.Replace(string.sub(mapName, endPos+1), "_", " ");
+    local nameOnly = mapName;
+    if (endPos != nil) then
+      nameOnly = string.Replace(string.sub(mapName, endPos+1), "_", " ");
+    end
     local upped = string.upper(string.sub(nameOnly, 1, 1))..string.sub(nameOnly, 2);
     return gamemode.." - "..upped;
   end
