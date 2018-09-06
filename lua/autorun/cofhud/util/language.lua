@@ -75,6 +75,7 @@ if CLIENT then
     @param {string} idString
   ]]
   function COFHUD:GetStringFromLanguage(idLanguage, idString)
+    if (self.Language[idLanguage].strings[idString] == nil) then return idString; end
     return self.Language[idLanguage].strings[idString].string;
   end
 
