@@ -24,6 +24,7 @@ if CLIENT then
     ["cofhud_ammo_clip"] = 0,
     ["cofhud_damage_enabled"] = 1,
     ["cofhud_death_enabled"] = 1,
+    ["cofhud_death_camera_enabled"] = 1,
     ["cofhud_intro_enabled"] = 1,
     ["cofhud_pickup_enabled"] = 1,
     ["cofhud_notification_enabled"] = 1,
@@ -163,6 +164,14 @@ if CLIENT then
   ]]
   function COFHUD:IsDeathScreenEnabled()
     return self.Configuration.Values["cofhud_death_enabled"]:GetInt() > 0;
+  end
+
+  --[[
+    Returns whether the death camera is enabled
+    @return {boolean} enabled
+  ]]
+  function COFHUD:IsDeathCameraEnabled()
+    return self.Configuration.Values["cofhud_death_camera_enabled"]:GetInt() > 0;
   end
 
   --[[

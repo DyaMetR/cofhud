@@ -15,7 +15,7 @@ if CLIENT then
 
   -- Calculate camera position and angles
   hook.Add("Think", "cofhud_death_think", function()
-    if not (COFHUD:IsDeathScreenEnabled() and COFHUD:IsEnabled()) then return end;
+    if not (COFHUD:IsDeathCameraEnabled() and COFHUD:IsDeathScreenEnabled() and COFHUD:IsEnabled()) then return end;
     if not LocalPlayer():Alive() then
       local tr = util.TraceLine( {
         start = LocalPlayer():GetPos(),
@@ -47,7 +47,7 @@ if CLIENT then
 
   -- Apply camera position and angle changes
   hook.Add("CalcView", "cofhud_death_camera", function(ply, origin, angles, fov, znear, zfar)
-    if LocalPlayer():Alive() or not (COFHUD:IsDeathScreenEnabled() and COFHUD:IsEnabled()) then return end;
+    if LocalPlayer():Alive() or not (COFHUD:IsDeathCameraEnabled() and COFHUD:IsDeathScreenEnabled() and COFHUD:IsEnabled()) then return end;
     local view = {};
 
     view.origin = cameraPos;
