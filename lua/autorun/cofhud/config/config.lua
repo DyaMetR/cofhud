@@ -25,6 +25,7 @@ if CLIENT then
     ["cofhud_damage_enabled"] = 1,
     ["cofhud_death_enabled"] = 1,
     ["cofhud_death_camera_enabled"] = 1,
+    ["cofhud_death_menu_simple"] = 0,
     ["cofhud_intro_enabled"] = 1,
     ["cofhud_pickup_enabled"] = 1,
     ["cofhud_notification_enabled"] = 1,
@@ -172,6 +173,14 @@ if CLIENT then
   ]]
   function COFHUD:IsDeathCameraEnabled()
     return self.Configuration.Values["cofhud_death_camera_enabled"]:GetInt() > 0;
+  end
+
+  --[[
+    Returns whether the death menu is simplified
+    @return {boolean} simplified
+  ]]
+  function COFHUD:IsDeathMenuSimplified()
+    return self.Configuration.Values["cofhud_death_menu_simple"]:GetInt() > 0;
   end
 
   --[[

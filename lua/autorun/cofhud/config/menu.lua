@@ -94,6 +94,12 @@ if CLIENT then
   	);
 
     panel:AddControl( "CheckBox", {
+  		Label = "Simplify death menu",
+  		Command = "cofhud_death_menu_simple",
+  		}
+  	);
+
+    panel:AddControl( "CheckBox", {
   		Label = "Enable notifications",
   		Command = "cofhud_notification_enabled",
   		}
@@ -170,7 +176,7 @@ if CLIENT then
 
     -- Credits
     panel:AddControl( "Label",  { Text = ""});
-    panel:AddControl( "Label",  { Text = "Version 1.2.0"});
+    panel:AddControl( "Label",  { Text = "Version 1.3.0"});
     panel:AddControl( "Label",  { Text = ""});
   	panel:AddControl( "Label",  { Text = "Credits"});
     panel:AddControl( "Label",  { Text = "Main script: DyaMetR"});

@@ -55,7 +55,11 @@ if CLIENT then
       surface.SetDrawColor(Color(255, 255, 255, 255 * title));
       surface.DrawTexturedRect((ScrW()/2) - (TITLE_W/2), (ScrH()/2) - (TITLE_H/2.7), TITLE_W, TITLE_H);
     end
-    createButton(panel, 0, TITLE_H/3, RESTART_IN, RESTART_OUT, function()
+
+    -- Respawn button
+    local y = TITLE_H/3;
+    if (COFHUD:IsDeathMenuSimplified()) then y = TITLE_H/6; end
+    createButton(panel, 0, y, RESTART_IN, RESTART_OUT, function()
       -- Close the screen
       panel:Close();
       panel = nil;
@@ -65,9 +69,13 @@ if CLIENT then
         RunConsoleCommand("-attack");
       end);
     end);
-    createButton(panel, 0, (TITLE_H/3) + BUTTON_H * 1.25, EXIT_IN, EXIT_OUT, function()
-      RunConsoleCommand("disconnect");
-    end);
+
+    -- Quit button
+    if (not COFHUD:IsDeathMenuSimplified()) then
+      createButton(panel, 0, (TITLE_H/3) + BUTTON_H * 1.25, EXIT_IN, EXIT_OUT, function()
+        RunConsoleCommand("disconnect");
+      end);
+    end
   end
 
   local function doAnimation()
