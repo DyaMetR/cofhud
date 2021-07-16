@@ -57,8 +57,8 @@ if CLIENT then
   ]]
   function COFHUD:DrawHealth(x, y)
     if (not self:IsHealthEnabled()) then return; end
-    local hp = LocalPlayer():Health()/100;
-    local max = LocalPlayer():GetMaxHealth()/100;
+    local hp = math.max(LocalPlayer():Health() * .01, 0);
+    local max = math.max(LocalPlayer():GetMaxHealth() * .01, 0);
     self:DrawIconBar(x, y - (self.BAR_HEIGHT + DEFAULT_ICON_HEIGHT), hp, FG_HEALTH, BG_HEALTH, ICON_HEALTH, nil, max);
     if (self:IsHealthArmorStacked()) then
       for i=1, math.ceil(hp)-1 do
@@ -80,8 +80,8 @@ if CLIENT then
   function COFHUD:DrawArmor(x, y)
     if (not self:IsArmorEnabled()) then return; end
     local icon = ICON_SCARE;
-    local hp = math.Clamp(math.ceil(LocalPlayer():Health()/100) - 1, 0, LocalPlayer():Health()/100);
-    local ap = LocalPlayer():Armor()/100;
+    local hp = math.max(math.ceil(LocalPlayer():Health() * .01) - 1, 0)
+    local ap = LocalPlayer():Armor() * .01;
     local offset = 0;
     if (self:IsHealthArmorStacked()) then offset = (self.BAR_WIDTH * hp) end;
     -- Draw main bar

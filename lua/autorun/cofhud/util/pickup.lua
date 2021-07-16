@@ -36,9 +36,11 @@ if CLIENT then
     HUDWeaponPickedUp hook
   ]]
   hook.Add("HUDWeaponPickedUp", "cofhud_pickup_weapon", function(weapon)
-    if (not COFHUD:IsEnabled() or not COFHUD:IsItemPickupEnabled()) then return end;
+    if (not COFHUD:IsEnabled() or not COFHUD:IsItemPickupEnabled() or not IsValid(weapon)) then return end;
+    local printName = weapon:GetClass();
+    if (weapon.GetPrintName) then printName = weapon:GetPrintName() end
     surface.PlaySound(WEAPON_SOUND);
-    COFHUD:SendDialog(COFHUD:GetString(WEAPON_STR, language.GetPhrase(weapon:GetPrintName())), ITEM_COLOR);
+    COFHUD:SendDialog(COFHUD:GetString(WEAPON_STR, language.GetPhrase(printName)), ITEM_COLOR);
   end);
 
   --[[
