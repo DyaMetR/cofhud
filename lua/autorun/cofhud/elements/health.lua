@@ -4,6 +4,9 @@
 
 if CLIENT then
 
+  local gmod_suit = GetConVar("gmod_suit")
+  local sv_auxpow_enabled = GetConVar("sv_auxpow_enabled")
+
   -- Parameters
   local DEFAULT_ICON_WIDTH, DEFAULT_ICON_HEIGHT = 32, 32;
   local X_OFFSET, Y_OFFSET, MARGIN_HORIZONTAL = 38, 1, 14;
@@ -80,12 +83,13 @@ if CLIENT then
   function COFHUD:DrawArmor(x, y)
     if (not self:IsArmorEnabled()) then return; end
     local icon = ICON_SCARE;
-    local hp = math.max(math.ceil(LocalPlayer():Health() * .01) - 1, 0)
+    local hp = math.max(math.ceil(LocalPlayer():Health() * .01) - 1, 0);
     local ap = LocalPlayer():Armor() * .01;
     local offset = 0;
+    local auxpow = self:IsSuitPowerEnabled() and (gmod_suit:GetBool() or (sv_auxpow_enabled and sv_auxpow_enabled:GetBool()));
     if (self:IsHealthArmorStacked()) then offset = (self.BAR_WIDTH * hp) end;
     -- Draw main bar
-    if (not self:IsArmorIconDefault()) then icon = ICON_SHIELD; end;
+    if (not self:IsArmorIconDefault() or auxpow) then icon = ICON_SHIELD; end;
     self:DrawIconBar(x + offset, y - (self.BAR_HEIGHT + DEFAULT_ICON_HEIGHT), ap, FG_SCARE, nil, icon);
 
     -- Draw extra bars
@@ -101,12 +105,32 @@ if CLIENT then
   end
 
   --[[
-    Draws both health and armor bars
+    Draws the aux. power bar
+    @param {number} x
+    @param {number} y
+    @void
+  ]]
+  function COFHUD:DrawSuitPower(x, y)
+    if (not gmod_suit:GetBool() and (not sv_auxpow_enabled or not sv_auxpow_enabled:GetBool())) then return; end
+    local hp = math.max(math.ceil(LocalPlayer():Health() * .01) - 1, 0);
+    local offset = 0;
+    if (self:IsHealthArmorStacked()) then offset = (self.BAR_WIDTH * hp) end;
+    self:DrawIconBar(x + offset, y - (self.BAR_HEIGHT + DEFAULT_ICON_HEIGHT), (sv_auxpow_enabled and sv_auxpow_enabled:GetBool() and AUXPOW:GetPower()) or LocalPlayer():GetSuitPower() * .01, FG_SCARE, nil, ICON_SCARE);
+  end
+
+  --[[
+    Draws health, armor and suit power bars.
     @void
   ]]
   function COFHUD:DrawStatusDisplay()
     self:DrawHealth(X_OFFSET + self:GetHealthOffsetX(), ScrH() - Y_OFFSET - self:GetHealthOffsetY());
-    self:DrawArmor(X_OFFSET  + self:GetArmorOffsetX() + self.BAR_WIDTH + MARGIN_HORIZONTAL, ScrH() - Y_OFFSET - self:GetArmorOffsetY());
+    if (self:IsSuitPowerEnabled() and (gmod_suit:GetBool() or (sv_auxpow_enabled and sv_auxpow_enabled:GetBool()))) then
+        self:DrawSuitPower(X_OFFSET + self:GetSuitPowerOffsetX() + self.BAR_WIDTH + MARGIN_HORIZONTAL, ScrH() - Y_OFFSET - self:GetSuitPowerOffsetY());
+        if (LocalPlayer():Armor() <= 0) then return; end
+        self:DrawArmor(X_OFFSET  + self:GetArmorOffsetX() + self.BAR_WIDTH * 2 + MARGIN_HORIZONTAL * 2, ScrH() - Y_OFFSET - self:GetArmorOffsetY());
+    else
+        self:DrawArmor(X_OFFSET  + self:GetArmorOffsetX() + self.BAR_WIDTH + MARGIN_HORIZONTAL, ScrH() - Y_OFFSET - self:GetArmorOffsetY());
+    end
   end
 
 end

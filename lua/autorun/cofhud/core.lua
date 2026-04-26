@@ -11,7 +11,8 @@ if CLIENT then
     CHudDamageIndicator = true,
     CHudAmmo = true,
     CHudSecondaryAmmo = true,
-    CHudHistoryResource = true
+    CHudHistoryResource = true,
+    CHudSuitPower = true,
   }
 
   hook.Add( "HUDShouldDraw", "cofhud_hide_default_hud", function( name )
@@ -22,6 +23,13 @@ if CLIENT then
     hide.CHudDamageIndicator = COFHUD:IsDamageEffectEnabled();
   	if ( hide[ name ] and COFHUD:IsEnabled() ) then return false end;
   end )
+
+  if (AUXPOW) then
+	hook.Add("AuxPowerHUDPaint", "cofhud_auxpow", function()
+	    if (not COFHUD:IsEnabled() or not COFHUD:IsSuitPowerEnabled()) then return; end
+		return true;
+	end)
+  end
 end
 
 -- Config
@@ -37,7 +45,6 @@ COFHUD:IncludeFile("util/death.lua");
 COFHUD:IncludeFile("util/intro.lua");
 COFHUD:IncludeFile("util/dialog.lua");
 COFHUD:IncludeFile("util/pickup.lua");
-COFHUD:IncludeFile("util/language.lua");
 
 -- Elements
 COFHUD:IncludeFile("elements/ammunition.lua");
@@ -45,15 +52,11 @@ COFHUD:IncludeFile("elements/draw.lua");
 COFHUD:IncludeFile("elements/health.lua");
 COFHUD:IncludeFile("elements/damage.lua");
 COFHUD:IncludeFile("elements/camera.lua");
---COFHUD:IncludeFile("elements/hand.lua");
 COFHUD:IncludeFile("elements/intro.lua");
 COFHUD:IncludeFile("elements/notification.lua");
 
 -- Data
 COFHUD:IncludeFile("data/ammunition.lua");
---COFHUD:IncludeFile("data/items.lua");
-COFHUD:IncludeFile("data/language/english.lua");
-COFHUD:IncludeFile("data/language/spanish.lua");
 
 -- Load add-ons
 local files, directories = file.Find("autorun/cofhud/add-ons/*.lua", "LUA");

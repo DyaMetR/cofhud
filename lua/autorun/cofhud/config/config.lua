@@ -16,6 +16,9 @@ if CLIENT then
     ["cofhud_armor_icon"] = 0,
     ["cofhud_armor_offset_x"] = 0,
     ["cofhud_armor_offset_y"] = 0,
+    ["cofhud_aux_enabled"] = 1,
+    ["cofhud_aux_offset_x"] = 0,
+    ["cofhud_aux_offset_y"] = 0,
     ["cofhud_health_mode"] = 1,
     ["cofhud_ammo_enabled"] = 1,
     ["cofhud_ammo_offset_x"] = 0,
@@ -101,6 +104,30 @@ if CLIENT then
   ]]
   function COFHUD:GetArmorOffsetY()
     return self.Configuration.Values["cofhud_armor_offset_y"]:GetInt();
+  end
+
+  --[[
+    Returns whether the suit power panel is enabled
+    @return {boolean} enabled
+  ]]
+  function COFHUD:IsSuitPowerEnabled()
+    return self.Configuration.Values["cofhud_aux_enabled"]:GetBool();
+  end
+
+  --[[
+    Returns the suit power panel x offset
+    @return {number} x
+  ]]
+  function COFHUD:GetSuitPowerOffsetX()
+    return self.Configuration.Values["cofhud_aux_offset_x"]:GetInt();
+  end
+
+  --[[
+    Returns the suit power panel y offset
+    @return {number} y
+  ]]
+  function COFHUD:GetSuitPowerOffsetY()
+    return self.Configuration.Values["cofhud_aux_offset_y"]:GetInt();
   end
 
   --[[
