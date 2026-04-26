@@ -4,17 +4,6 @@
 
 if CLIENT then
 
-  -- Parameters
-  local DEFAULT_CLIP_SIZES = {
-    ["weapon_pistol"] = 18,
-    ["weapon_357"] = 6,
-    ["weapon_smg1"] = 45,
-    ["weapon_ar2"] = 30,
-    ["weapon_shotgun"] = 6,
-    ["weapon_crossbow"] = 1,
-    ["weapon_annabelle"] = 2
-  };
-
   -- Weapons database
   COFHUD.CustomAmmoScript = {}; -- Custom script to display ammo
   COFHUD.CustomWeaponAmmoDisplay = {}; -- Linked weapons to a custom script
@@ -74,15 +63,7 @@ if CLIENT then
     @return {number} clipSize
   ]]
   function COFHUD:GetClipSize(weapon)
-    if (DEFAULT_CLIP_SIZES[weapon:GetClass()]) then
-      return DEFAULT_CLIP_SIZES[weapon:GetClass()];
-    else
-      if (weapon.Primary) then
-        return weapon.Primary.ClipSize;
-      else
-        return 0;
-      end
-    end
+    return weapon:GetMaxClip1();
   end
 
   --[[

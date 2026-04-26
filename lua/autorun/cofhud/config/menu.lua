@@ -194,7 +194,7 @@ if CLIENT then
 
     -- Credits
     panel:AddControl( "Label",  { Text = ""});
-    panel:AddControl( "Label",  { Text = string.format(language.GetPhrase("cofhud.toolmenu.version"), "1.4")});
+    panel:AddControl( "Label",  { Text = string.format(language.GetPhrase("cofhud.toolmenu.version"), COFHUD.Version)});
     panel:AddControl( "Label",  { Text = ""});
   	panel:AddControl( "Label",  { Text = "#cofhud.toolmenu.credits.code"});
     panel:AddControl( "Label",  { Text = "#cofhud.toolmenu.credits.gamedev"});

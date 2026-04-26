@@ -1,13 +1,16 @@
 --[[------------
   CRY OF FEAR
 Heads Up Display
- Version 1.4
+ Version 1.4.1
     26/04/26
 By DyaMetR
 ]]--------------
 
 -- Main framework table
 COFHUD = {};
+
+-- Version
+COFHUD.Version = "1.4.1";
 
 --[[
   METHODS
